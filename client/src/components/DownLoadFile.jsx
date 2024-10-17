@@ -21,7 +21,7 @@ const DownLoadFile = () => {
         }
     }
   return (
-    <div>
+    <div className='download'>
        <input type="text" placeholder="File ID" onChange={(e) => setFileId(e.target.value)} />
       <input type="text" placeholder="6-digit code" onChange={(e) => setCode(e.target.value)} />
       <button onClick={handleDownload}>Download</button>
