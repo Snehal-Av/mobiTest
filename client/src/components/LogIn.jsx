@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useAuth } from './AuthProvider';
+import { useNavigate } from 'react-router';
 // import { useAuth } from '../Auth/AuthProvider';
 
 const LogInPage = () => {
+  const navigate=useNavigate()
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: ""
@@ -26,7 +28,7 @@ const LogInPage = () => {
       .then((res) => {
         storeTokenInLS(res.data.token)
         setUserLogin(res.data)
-        
+        navigate('/file') 
         console.log(res.data);
       })
 
@@ -38,9 +40,9 @@ const LogInPage = () => {
         <main>
           <div className="section-registration">
             <div className="container grid grid-two-cols">
-              <div className="registration-image reg-img">
+              <div className="registration-imag">
                 <img
-                  src="/images/register.png"
+                  src="./img/register.png"
                   alt="a nurse with a cute look"
                   width="400"
                   height="500"
@@ -52,7 +54,7 @@ const LogInPage = () => {
                 <br />
                 <form onSubmit={handleSubmit}>
                   <div>
-                    <label htmlFor="email">email</label>
+                    <label htmlFor="email">Email</label>
                     <input
                       type="email"
                       name="email"
@@ -63,7 +65,7 @@ const LogInPage = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="password">password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                       type="password"
                       name="password"
@@ -73,8 +75,8 @@ const LogInPage = () => {
                     />
                   </div>
                   <br />
-                  <button type="submit" className="btn btn-submit">
-                    LOgIn Now
+                  <button type="submit">
+                    LogIn Now
                   </button>
                 </form>
               </div>

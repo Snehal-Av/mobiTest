@@ -7,7 +7,7 @@ const authMiddleware = async (req, res, next) => {
     return res.status(401).send("Access Denied");
   }
 
-  const jwtToken = token.replace("Bearer", "").trim();
+  const jwtToken = token.replace("Bearer","").trim();
   console.log(jwtToken);
   try {
     const isVerified = jwt.verify(jwtToken, process.env.SECRETE_KEY);

@@ -18,9 +18,9 @@ const register = async (req, res) => {
       .status(200)
       .json({
         msg: "Register Successfully",
-        userCreated
-        // token:await userCreated.generateToken(),
-        // userId: userCreated._id.toString(),
+        userCreated,
+        token:await userCreated.generateToken(),
+        userId: userCreated._id.toString(),
       });
   } catch (error) {
     console.log(error);
@@ -48,14 +48,14 @@ const logIn = async (req, res) => {
   }
 };
 
-const dashUser=async(req,res)=>{
-  try {
-      const userData=req.user
-  console.log(userData)
-  return res.status(200).json({msg:userData})
-  } catch (error) {
-      console.log(error);
+// const dashUser=async(req,res)=>{
+//   try {
+//       const userData=req.user
+//   console.log(userData)
+//   return res.status(200).json({msg:userData})
+//   } catch (error) {
+//       console.log(error);
       
-  }
-}
-module.exports = { register, logIn,dashUser };
+//   }
+// }
+module.exports = { register, logIn };

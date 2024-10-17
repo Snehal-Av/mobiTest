@@ -1,6 +1,5 @@
 const File = require("../models/fileModel");
 const path = require('path');
-const fs = require('fs');
 const multer=require('multer')
 
 // const {nanoid}=require('nanoid')
@@ -11,7 +10,8 @@ function generateSixDigitCode() {
   }
 
 const uploadFile = async (req, res) => {
-  const { file } = req;
+  const {userId}=req.user
+  const  file  = req.file;
   
   if (!file) {
     return res.status(400).json({ message: 'No file uploaded' });
@@ -19,17 +19,15 @@ const uploadFile = async (req, res) => {
   const code = generateSixDigitCode()
 
   const newFile = new File({
-    Id: req.user.userId,
-    filename: file.originalname,
-    path: file.path,
-    code,
+   userId,filename: file.originalname,
+   filepath: file.path, code
   });
   await newFile.save();
-  res.json({ msg: "File uploaded successfully", code });
+  res.json({ msg: "File uploaded successfully", code});
 };
 
 const getUploadedFile = async (req, res) => {
-  const Id = req.user.userId;
+  const Id = req.body;
   const files = await File.find({ Id });
   res.status(200).json(files);
 };

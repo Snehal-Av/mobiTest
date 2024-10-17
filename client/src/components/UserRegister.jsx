@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from './AuthProvider'
+import {useNavigate} from 'react-router-dom'
 // import { useAuth } from '../Auth/AuthProvider'
 
 
 const Register = () => {
 
-
+ const navigate=useNavigate()
   const [user,setUser]=useState({
     email:"",
     phone:"",
@@ -34,7 +35,7 @@ const Register = () => {
           storeTokenInLS(response.data.token)
         
           console.log(response);
-          // navigate('/login')
+          navigate('/login')
         })
       }
       
@@ -48,10 +49,10 @@ const Register = () => {
       <section>
         <main>
           <div className="section-registration">
-            <div className="container grid grid-two-cols">
-              <div className="registration-image reg-img">
+            <div className="container">
+              <div className="registration">
                 <img
-                  src="/images/register.png"
+                  src="./img/register.png"
                   alt="a nurse with a cute look"
                   width="400"
                   height="500"
@@ -59,12 +60,12 @@ const Register = () => {
               </div>
               {/* our main registration code  */}
               <div className="registration-form">
-                <h1 className="main-heading mb-3">registration form</h1>
+                <h2 className="main-heading mb-3">Registration form</h2>
                 <br />
                 <form onSubmit={handleSubmit}>
                 
                   <div>
-                    <label htmlFor="email">email</label>
+                    <label htmlFor="email">Email : </label>
                     <input
                       type="text"
                       name="email"
@@ -74,7 +75,7 @@ const Register = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="password">password</label>
+                    <label htmlFor="password">password : </label>
                     <input
                       type="password"
                       name="password"
@@ -84,7 +85,7 @@ const Register = () => {
                     />
                   </div>
                   <br />
-                  <button type="submit" className="btn btn-submit">
+                  <button type="submit" >
                     Register Now
                   </button>
                 </form>

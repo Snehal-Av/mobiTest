@@ -31,10 +31,10 @@ const FileUpload = () => {
     }
 
     return (
-        <div>
+        <div className='file'>
             <h2>File Upload</h2>
             <form action='/upload' enctype="multipart/form-data">
-            <input type="file" onChange={onFileChange} />
+            <input  type="file" onChange={onFileChange} />
             <button onClick={onFileUpload}>Upload</button>
             </form>
             {/* <p>{message}</p>
