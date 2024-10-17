@@ -13,7 +13,11 @@ const storage=multer.diskStorage({
         }
         cb(null,uploadPath)
     },
-    filename:(req,file,cb)=>(null,`${Date.now()}-${file.originalname}`)
+    filename:(req,file,cb)=>{
+        const filename=`${Date.now()}-${file.originalname}`
+        console.log(`saving file as :${filename} `)
+        cb(null,filename)
+    }
 });
 
 
@@ -24,8 +28,8 @@ filerouter.post("/upload",upload.single('file'),uploadFile)
 
 filerouter.get("/getfile",getUploadedFile)
 
-filerouter.delete("/removefile/:id",authMiddleware,removeFile)
+filerouter.delete("/removefile/:fileId",removeFile)
 
-filerouter.get("/download/:id",authMiddleware,downloadFile)
+filerouter.get("/download/:fileId/:code",downloadFile)
 
 module.exports=filerouter

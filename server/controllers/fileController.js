@@ -1,6 +1,7 @@
 const File = require("../models/fileModel");
 const path = require('path');
 const multer=require('multer')
+const fs=require('fs')
 
 // const {nanoid}=require('nanoid')
 
@@ -10,7 +11,7 @@ function generateSixDigitCode() {
   }
 
 const uploadFile = async (req, res) => {
-  const {userId}=req.user
+  const userId=req.user
   const  file  = req.file;
   
   if (!file) {
@@ -27,28 +28,35 @@ const uploadFile = async (req, res) => {
 };
 
 const getUploadedFile = async (req, res) => {
-  const Id = req.body;
-  const files = await File.find({ Id });
+ try {
+  const userId = req.user;
+  const files = await File.find({ userId });
   res.status(200).json(files);
+ } catch (error) {
+  res.status(500).json({ message: 'Server error' });
+ }
 };
 
 const removeFile = async (req, res) => {
-  const file = await File.findById(req.params.fileId);
-  if (!file || file.userId.toString() !== req.user.id) {
-    return res.status(403).json({ msg: "Unauthorized or file not found" });
+  const fileId=req.params;
+  const file=await File.findById(fileId)
+  if(!file){
+    res.status(404).json({msg:"file not found"})
   }
-  await File.findByIdAndDelete(req.params.fileId);
-  File.unlinkSync(path.json(__dirname, file.path));
-  res.json({ msg: "File removed successfully" });
+  await File.findByIdAndDelete(id)
+  res.status(200).json({msg:"user deleted"})
 };
 
+
 const downloadFile = async (req, res) => {
-  const { code } = req.body;
-  const file = await File.findOne({ _id: req.params.fileId, code });
-  if (!file) {
-    return res.status(403).json({ msg: "Invalid code" });
+  const {fileId, code } = req.params;
+  const file = await File.findById(fileId);
+  if (!file || file.code !== code) {
+    return res.status(403).json({ message: 'Invalid code or file not found' });
   }
-  res.download(file.path, file.filename);
+
+  res.download(path.resolve(file.filePath));
+  
 };
 
 module.exports = { uploadFile, removeFile, getUploadedFile, downloadFile };

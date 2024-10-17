@@ -36,17 +36,17 @@ button{
   border: 2px solid blue;
   border-radius:35px;
   padding: 10px;
-  width: 100%;
+  width: 300px;
 }
 
 .file{
-  width: 400px;
-  height: 300px;
+  /* width: 700px; */
+  /* height: 300px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 500px;
+  /* margin-left: 500px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   margin-top: 70px;

@@ -33,6 +33,9 @@ const LogInPage = () => {
       })
 
   }
+  // const logOut=()=>{
+  //   removeTokenLS('token')
+  // }
 
   return (
     <div>

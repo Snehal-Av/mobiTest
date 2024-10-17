@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from './AuthProvider'
+import { useNavigate } from 'react-router'
 
 const FileUpload = () => {
+    const navigate=useNavigate()
     const [file, setFile] = useState(null)
   
     const {getTokenInLS}=useAuth()
@@ -23,6 +25,7 @@ const FileUpload = () => {
                 },
             });
             alert(`uploaded ${res.data.code}`)
+            navigate('/getfile')
         } catch (err) {
             console.error(err.message);
     

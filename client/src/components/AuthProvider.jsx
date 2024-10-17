@@ -10,9 +10,13 @@ export const AuthProvider=({children})=>{
     const getTokenInLS=(getToken)=>{
       return localStorage.getItem(getToken)
      }
+     const removeTokenLS=(removeToken)=>{
+      return localStorage.removeItem(removeToken)
+     }
+
 
   return(
-    <AuthContext.Provider value={{storeTokenInLS,getTokenInLS}} >
+    <AuthContext.Provider value={{removeTokenLS,storeTokenInLS,getTokenInLS}} >
     {children}
   </AuthContext.Provider>
   )
