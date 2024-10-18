@@ -20,8 +20,6 @@ const storage=multer.diskStorage({
     }
 });
 
-
-
 const upload=multer({storage});
 
 filerouter.post("/upload",upload.single('file'),uploadFile)
@@ -30,6 +28,6 @@ filerouter.get("/getfile",getUploadedFile)
 
 filerouter.delete("/removefile/:fileId",removeFile)
 
-filerouter.get("/download/:fileId/:code",downloadFile)
+filerouter.get("/download/:code",downloadFile)
 
 module.exports=filerouter

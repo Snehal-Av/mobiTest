@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 
 const DownLoadFile = () => {
     
-    const [fileId,setFileId]=useState('')
+    
     const [code,setCode]=useState('')
     const handleDownload=async()=>{
         try {
-          const res=await axios.get(`http://localhost:7001/download/${fileId}/${code}`,{
+          const res=await axios.get(`http://localhost:7001/download/${code}`,{
             responseType: 'blob' 
           })
           const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -22,7 +22,6 @@ const DownLoadFile = () => {
     }
   return (
     <div className='download'>
-       <input type="text" placeholder="File ID" onChange={(e) => setFileId(e.target.value)} />
       <input type="text" placeholder="6-digit code" onChange={(e) => setCode(e.target.value)} />
       <button onClick={handleDownload}>Download</button>
     </div>

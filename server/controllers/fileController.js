@@ -49,9 +49,9 @@ const removeFile = async (req, res) => {
 
 
 const downloadFile = async (req, res) => {
-  const {fileId, code } = req.params;
-  const file = await File.findById(fileId);
-  if (!file || file.code !== code) {
+  const {code } = req.body;
+  const file = await File.findOne(code);
+  if (file.code !== code) {
     return res.status(403).json({ message: 'Invalid code or file not found' });
   }
 
